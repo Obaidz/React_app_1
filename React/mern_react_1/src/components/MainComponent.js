@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Navbar, NavbarBrand } from 'reactstrap';  // frist reactstrap componet we called.
 import Menu from './FunctionalMenuComp';      // component for menu list taht we made.
 import { DISHES } from '../shared/dishes';
 import DishDetails from './FunctinalDishDetComp';
-
+import Header from './HeaderComponent';
+import Footer from './FooterComponent';
 // Components are independent and reusable bits of code. 
 //They serve the same purpose as JavaScript functions, 
 //but work in isolation and returns HTML via a render function.
@@ -30,17 +30,13 @@ class Main extends Component {    // parent component
       if (this.state.dishes  != null) {
         return (
             <div>
-              <Navbar dark color="primary">     {/* child component */}
-                <div className="container">
-                  <NavbarBrand href="/"> Navbar brand Yo </NavbarBrand>
-                </div>
-              </Navbar>
+              <Header />
               <Menu dishes = {this.state.dishes}
               
                   onClick={(dish) => this.onDishSelect(dish)} 
                   />
               <DishDetails dish= {this.state.dishes.filter((dish) => dish === this.state.selectedDish)[0]} />
-              
+              <Footer />
                   
                        {/* child component , Menu is class here which is from MenuComponent, 
                                                            in class itself it had no state (attributes), 
