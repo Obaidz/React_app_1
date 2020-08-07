@@ -2,7 +2,7 @@ import React, { Component } from 'react';
                                               // frist reactstrap componet we called.
 import Main from './components/MainComponent';      // component for menu list taht we made.
 import './App.css';
-
+import {BrowserRouter} from 'react-router-dom';
 
 // Components are independent and reusable bits of code. 
 //They serve the same purpose as JavaScript functions, 
@@ -11,9 +11,21 @@ class App extends Component {    // parent component
   
   render() {
     return (
-      <div>
 
-        <Main />     {/* child component , Menu is class here which is from MenuComponent, 
+      <BrowserRouter>
+        <div>
+          <Main />     
+        </div>
+      </BrowserRouter>
+      
+      
+    );
+  }
+
+}
+
+export default App;
+{/* child component , Menu is class here which is from MenuComponent, 
                                                      in class itself it had no state (attributes), 
                                                       but now here we are 
                                                       assignning it the state of dishes*/}
@@ -28,11 +40,3 @@ class App extends Component {    // parent component
           and then made use of in the other component in order to construct 
           the overall user interface. 
         */}
- 
-      </div>
-    );
-  }
-
-}
-
-export default App;

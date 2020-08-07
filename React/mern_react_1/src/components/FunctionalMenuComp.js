@@ -1,16 +1,24 @@
 import React from 'react';  // importing react and class Component from react
-import { Card, CardImg, CardImgOverlay, CardTitle } from 'reactstrap';
-    
-function RenderMenuItem({dish, onClick}){
+import { Card, CardImg, CardImgOverlay, CardTitle, Breadcrumb, BreadcrumbItem } from 'reactstrap';
+import { Link } from 'react-router-dom';
+function RenderMenuItem({dish}){
     return(
-        <Card onClick= { () => onClick(dish)} >
-                     
-            <CardImg width="100%" src={dish.image} alt= {dish.name}  />   
-                       
+        <Card>
 
-            <CardImgOverlay body className="ml-5">
-                <CardTitle heading> {dish.name}</CardTitle>
-            </CardImgOverlay>
+            {/** This dish ID is the one that I want to pass. But then this link allows me 
+             * to only specify the URL to which I navigate. Now, how do I make use of this dish ID? 
+             * This is where I can use back quotes. So a back quote means whatever is enclosed inside here, 
+             * so if I put a JavaScript value there that could be evaluated and then replace that value there. 
+             * So when I say back quote, 
+             * and inside the back quote I will say, menu slash dollar dish ID. That's it.  */}
+            
+            <Link to={`/menu/${dish.id}`} >
+                <CardImg width="100%" src={dish.image} alt= {dish.name}  />   
+                       
+                <CardImgOverlay >
+                <CardTitle> {dish.name}</CardTitle>
+                </CardImgOverlay>
+            </Link>      
 
         </Card>
     );
@@ -22,7 +30,7 @@ const Menu = (props) => {                   // can also make a method this way
         return (
             <div key={dish.id} className="col-12 col-md-5 m-1">
                 
-                <RenderMenuItem dish={dish} onClick={props.onClick} />              {/** RenderMenuItem takes two parameters. dish and Onclick */}
+                <RenderMenuItem dish={dish} />              {/** RenderMenuItem takes two parameters. dish */}
             </div>
         );
     });          // defining menu whiich consists of array dishes. So, these dishes that we have defined here is an array of JavaScript objects. 
@@ -31,7 +39,16 @@ const Menu = (props) => {                   // can also make a method this way
     // we will use const menu here in Media list.
     return (
         <div className="container">
-       
+            <div className="row">
+                <Breadcrumb>
+                    <BreadcrumbItem> <Link to='/home'>Home </Link> </BreadcrumbItem>
+                    <BreadcrumbItem active> Menu </BreadcrumbItem>
+                </Breadcrumb>
+                <div className="col-12">
+                    <h3>Menu</h3>
+                    <hr />
+                </div>
+            </div>
             <div className="row">
                 {menu}       
             </div>
