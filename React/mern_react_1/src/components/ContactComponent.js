@@ -1,5 +1,5 @@
 import React from 'react';
-import { Breadcrumb, BreadcrumbItem, Button, Form, FormGroup, Label, Input, Col } from 'reactstrap';
+import { Breadcrumb, BreadcrumbItem, Button, Form, FormGroup, Label, Input, Col, Row } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 
@@ -14,7 +14,13 @@ class Contact extends React.Component {
             email:'',
             agree: false,
             contactType: 'Tel.',
-            message: ''
+            message: '',
+            touched: {
+                firstname: false,
+                lastname: false,
+                telnum: false,
+                email: false
+            }
 
         }
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -23,7 +29,7 @@ class Contact extends React.Component {
     handleInputChange(event){
         const target = event.target;            // whatever field it is.
         const value = target.type === 'checkbox' ? target.checked : target.value;           // if type is checkbox then retreive value from checked otherwise retrieve it from attribute value.
-        const name = target.name;               // get the name, its the same sa state name which are same as form ID's
+        const name = target.name;               // get the name, its the same as state name which are same as form name attribute
 
         this.setState({
             [name] : value                      // getting all names changing sate of these state name to values we updated. 
@@ -82,7 +88,7 @@ class Contact extends React.Component {
                             <FormGroup row>     {/* FormGroup allows us to use bootstarp grid inside form, like defining a new row for form to layout form element like input box */}
                                 <Label htmlFor="firstname" md={2}> FirstName</Label>  {/* md = 2 means for medium to extra large devices this will occupy 2 columns, as its JSX, we are using htmlFor instead of for */}
                                 <Col md={10}>           {/* col in reactstarp is like saying div classNmae= col-md-10, short form  */}
-                                    <Input type="text" id="firstname" name="firstname" placeholder="first name" valid={this.state.firstname} onChange={this.handleInputChange} />
+                                    <Input type="text" id="firstname" name="firstname" placeholder="first name" value={this.state.firstname} onChange={this.handleInputChange} />
                                 </Col>
                             </FormGroup>
 
@@ -90,21 +96,21 @@ class Contact extends React.Component {
                             <FormGroup row>    
                                 <Label htmlFor="lastname" md={2}> LastName</Label>  
                                 <Col md={10}>           
-                                    <Input type="text" id="lastname" name="lastname" placeholder="last name" valid={this.state.lastname} onChange={this.handleInputChange} />
+                                    <Input type="text" id="lastname" name="lastname" placeholder="last name" value={this.state.lastname} onChange={this.handleInputChange} />
                                 </Col>
                             </FormGroup>
 
                             <FormGroup row>    
                                 <Label htmlFor="telnum" md={2}> Contact Tel.</Label>  
                                 <Col md={10}>           
-                                    <Input type="tel" id="telnum" name="telnum" placeholder="Telephone number" valid={this.state.telnum} onChange={this.handleInputChange} />
+                                    <Input type="tel" id="telnum" name="telnum" placeholder="Telephone number" value={this.state.telnum} onChange={this.handleInputChange} />
                                 </Col>
                             </FormGroup>
 
                             <FormGroup row>    
                                 <Label htmlFor="email" md={2}> Email </Label>  
                                 <Col md={10}>           
-                                    <Input type="email" id="email" name="email" placeholder="email" valid={this.state.email} onChange={this.handleInputChange} />
+                                    <Input type="email" id="email" name="email" placeholder="email" value={this.state.email} onChange={this.handleInputChange} />
                                 </Col>
                             </FormGroup>
 
@@ -118,7 +124,7 @@ class Contact extends React.Component {
                                 </Col>               {/* This is telling that this will occupy six columns with offset of 2 columns, offset =2 is pushing it 2 columns right.*/}
 
                                 <Col md={{size: 3, offset: 1}}>
-                                    <Input type="select" name="contactType" valid={this.state.contactType} onChange={this.handleInputChange} >
+                                    <Input type="select" name="contactType" value={this.state.contactType} onChange={this.handleInputChange} >
                                         <option>
                                             tel
                                         </option>
@@ -133,7 +139,7 @@ class Contact extends React.Component {
                             <FormGroup row>    
                                 <Label htmlFor="message" md={2}> Your FeedBack </Label>  
                                 <Col md={10}>           
-                                    <Input type="textarea" id="message" name="message" row="20"  valid={this.state.message} onChange={this.handleInputChange} />
+                                    <Input type="textarea" id="message" name="message" row="20"  value={this.state.message} onChange={this.handleInputChange} />
                                 </Col>
                             </FormGroup>
 
